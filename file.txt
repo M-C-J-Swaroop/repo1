@@ -1,4 +1,9 @@
 Initial content
 Changes in branch1
+<<<<<<< HEAD
 Changes in branch2
 Changes in branch2
+=======
+Changes in branch1
+Changes in branch1
+>>>>>>> branch1
