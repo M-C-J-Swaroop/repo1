@@ -1,1 +1,58 @@
-12345
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                // Your build steps here
+                echo 'Building the project...'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                // Your test steps here
+                echo 'Running tests...'
+            }
+        }
+        
+        stage('Deploy to Dev') {
+            when {
+                expression { params.BRANCH_NAME == 'dev' }
+            }
+            steps {
+                // Your deployment steps for the dev environment
+                echo 'Deploying to the dev environment...'
+            }
+        }
+        
+        stage('Deploy to QA') {
+            when {
+                expression { params.BRANCH_NAME == 'qa' }
+            }
+            steps {
+                // Your deployment steps for the qa environment
+                echo 'Deploying to the qa environment...'
+            }
+        }
+        
+        stage('Deploy to Prod') {
+            when {
+                expression { params.BRANCH_NAME == 'master' }
+            }
+            steps {
+                // Your deployment steps for the production environment
+                echo 'Deploying to the production environment...'
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo 'Pipeline successful!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
